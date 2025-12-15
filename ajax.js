@@ -1,43 +1,80 @@
+// متغير لتخزين البيانات القادمة من JSON
 let allDestinations = [];
 
-async function loadDestinations() {
-  try {
-    const res = await fetch("destinatinos.json");
-    allDestinations = await res.json();
-    renderDestinations(allDestinations);
-  } catch (error) {
-    console.error("Error loading destinations:", error);
-  }
+// عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    loadDestinations();
+});
+
+// دالة لجلب البيانات باستخدام AJAX (Fetch)
+function loadDestinations() {
+    fetch('destinatinos.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("فشل ");
+            }
+            return response.json();
+        })
+        .then(data => {
+            allDestinations = data; // تخزين البيانات لاستخدامها في الفلترة
+            displayDestinations(data); // عرض كل البيانات مبدئياً
+        })
+        .catch(error => console.error('Error loading JSON:', error));
 }
 
-function renderDestinations(destinations) {
-  const container = document.getElementById("destinations-list");
-  container.innerHTML = "";
+// دالة لعرض البيانات داخل الـ HTML باستخدام innerHTML
+function displayDestinations(items) {
+    const galleryContainer = document.getElementById('gallery');
+    
+    // إذا لم توجد عناصر
+    if (items.length === 0) {
+        galleryContainer.innerHTML = '<p>لا توجد وجهات في هذا التصنيف.</p>';
+        return;
+    }
 
-  destinations.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "destination-card";
+    // بناء كود HTML
+    let htmlContent = '';
+    
+    items.forEach(item => {
+        // نستخدم رابط صورة افتراضي في حالة عدم وجود الصورة الحقيقية للتجربة
+        // يمكنك إزالة هذا الشرط إذا كانت الصور موجودة فعلياً
+        const imgSrc = item.image; 
 
-    card.innerHTML = `
-      <img src="${item.image}" alt="${item.name}">
-      <h3>${item.name}</h3>
-      <p>${item.description}</p>
-      <span class="tag">${item.type}</span>
-    `;
+        htmlContent += `
+            <div class="card">
+                <img src="${imgSrc}" alt="${item.name}">
+                <div class="card-content">
+                    <span class="category-tag">${item.type}</span>
+                    <h3>${item.name}</h3>
+                    <p>${item.description}</p>
+                </div>
+            </div>
+        `;
+    });
 
-    container.appendChild(card);
-  });
+    // تحديث الصفحة باستخدام innerHTML كما هو مطلوب
+    galleryContainer.innerHTML = htmlContent;
 }
 
-function filterDestinations(type) {
-  if (type === "All") {
-    renderDestinations(allDestinations);
-  } else {
-    const filtered = allDestinations.filter(
-      d => d.type === type
-    );
-    renderDestinations(filtered);
-  }
-}
+// دالة الفلترة
+function filterDestinations(category) {
+    // تحديث ستايل الأزرار (Active class)
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if(btn.textContent.includes(category === 'All' ? 'الكل' : 
+           category === 'resturant' ? 'المطاعم و المقاهي' : 
+           category === 'Museums' ? 'المتاحف':
+            category === 'entertainment' ? 'الاماكن الترفهية')) {
+            btn.classList.add('active');
+        }
+    });
 
-window.onload = loadDestinations;
+    // منطق الفلترة
+    if (category === 'All') {
+        displayDestinations(allDestinations);
+    } else {
+        const filtered = allDestinations.filter(item => item.type === category);
+        displayDestinations(filtered);
+    }
+}
