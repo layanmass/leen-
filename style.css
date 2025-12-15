@@ -442,3 +442,8 @@ footer {
     font-weight: bold;
     border-bottom: 2px solid var(--qatar-gold);
 }
+.highlight {
+    background: rgba(212, 175, 55, 0.1) !important;
+    border-right: 4px solid var(--gold);
+}
+
