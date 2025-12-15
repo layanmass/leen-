@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchData() {
     try {
-        const response = await fetch('data/destinations.json');
+        const response = await fetch('destinations.json');
         
         if (!response.ok) {
             throw new Error('فشل في تحميل البيانات');
@@ -53,3 +53,4 @@ function filterDestinations(category) {
         displayDestinations(filteredData);
     }
 }
+
