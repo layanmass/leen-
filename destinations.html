@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة الوجهات السياحية</title>
+     <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/ajax.js"></script>
+
+</head>
+<body>
+
+    <header>
+        <h1>استكشف وجهاتنا في قطر</h1>
+        <p>مجموعة مختارة من أجمل المطاعم و المتاحف و الاماكن الترفهيه</p>
+        <nav>
+      <a href="index.html">الصفحة الرئيسية</a>
+      <a href="about.html"> عن قطر</a>
+      <a href="destinations.html">الوجهات السياحية</a>
+      <a href="contact.html">تواصل معنا</a>
+        </nav>
+    </header>
+
+
+    <div class="filter-container">
+        <button onclick="filterDestinations('All')" class="active">الكل</button>
+        <button onclick="filterDestinations('resturant')">المطاعم و المقاهي</button>
+        <button onclick="filterDestinations('Museums')">المتاحف</button>
+        <button onclick="filterDestinations('entertainment')">الاماكن الترفهيه</button>
+
+    </div>
+
+    <div id="gallery" class="gallery-grid">
+        </div>
+   <footer>
+    <p>© 2025</p>
+</footer>
+</body>
+</html>

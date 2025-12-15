@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>التواصل والحجز - قطر</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>صفحة التواصل والحجز</h1>
+    <nav>
+      <a href="index.html">الصفحة الرئيسية</a>
+      <a href="about.html">عن قطر</a>
+      <a href="destinations.html">الوجهات السياحية</a>
+      <a href="contact.html">تواصل معنا</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <form id="contactForm">
+
+        <label for="name">الاسم</label>
+        <input type="text" id="name" >
+
+        <label for="email">البريد الإلكتروني</label>
+        <input type="email" id="email">
+
+        <label for="subject">نوع الاستفسار</label>
+        <select id="subject">
+            <option value="">-- اختر --</option>
+            <option value="حجز">طلب حجز</option>
+            <option value="استفسار">استفسار عام</option>
+            <option value="دعم">دعم فني</option>
+        </select >
+
+        <label for="message">الاستفسار</label>
+        <textarea id="message" rows="5"></textarea>
+
+        <button type="submit">إرسال</button>
+    </form>
+
+    <div id="confirmation" class="confirmation"></div>
+
+  
+    <div class="info">
+        <h3>معلومات التواصل</h3>
+        <p>📍 الدوحة – دولة قطر</p>
+        <a href="mailto: ourg@gmail.com">📧 ourg@gmail.com </a>
+    </div>
+
+   
+    <div class="map">
+        <h3>موقعنا</h3>
+        <iframe 
+            src="https://www.google.com/maps?q=Doha,Qatar&output=embed"
+            loading="lazy">
+        </iframe>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2025</p>
+</footer>
+
+<script src="./js/script.js"></script>
+</body>
+</html>
